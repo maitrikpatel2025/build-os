@@ -4,9 +4,9 @@ Provides branch management, commit, merge, and PR operations
 adapted for milestone-based workflow.
 """
 
-import subprocess
 import json
 import logging
+import subprocess
 from typing import Optional, Tuple
 
 

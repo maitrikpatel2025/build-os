@@ -8,17 +8,16 @@ Usage:
 
 import argparse
 import asyncio
-import logging
-import sys
 import os
+import sys
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from adw_modules.build_state import BuildState
 from adw_modules.agent import execute_template
-from adw_modules.milestone_ops import setup_milestone, advance_milestone_status
+from adw_modules.build_state import BuildState
 from adw_modules.data_types import AgentTemplateRequest
-from adw_modules.utils import setup_logger, check_env_vars
+from adw_modules.milestone_ops import advance_milestone_status, setup_milestone
+from adw_modules.utils import check_env_vars, setup_logger
 
 
 async def run_section_frontend(build_id: str, section_id: str) -> bool:

@@ -6,7 +6,7 @@ import os
 import re
 import sys
 import uuid
-from typing import Any, TypeVar, Type, Union, Dict, Optional, Tuple, Literal
+from typing import Any, Dict, Literal, Optional, Tuple, Type, TypeVar, Union
 
 T = TypeVar("T")
 
@@ -113,7 +113,7 @@ def parse_json(text: str, target_type: Type[T] = None) -> Union[T, Any]:
         result = json.loads(json_str)
 
         if target_type and hasattr(target_type, "__origin__"):
-            if target_type.__origin__ == list:
+            if target_type.__origin__ is list:
                 item_type = target_type.__args__[0]
                 if hasattr(item_type, "model_validate"):
                     result = [item_type.model_validate(item) for item in result]

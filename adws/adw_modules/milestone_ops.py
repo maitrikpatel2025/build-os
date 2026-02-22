@@ -5,23 +5,23 @@ frontend build → backend build → wire data → validate.
 Handles worktree creation/cleanup and state transitions.
 """
 
-import os
 import logging
-from typing import Optional, Tuple, Dict, Any
+import os
+from typing import Optional, Tuple
+
 from .build_state import BuildState
-from .worktree_ops import (
-    create_worktree,
-    remove_worktree,
-    setup_worktree_environment,
-    find_available_ports,
-    get_worktree_path,
-)
+from .data_types import MilestoneStatus
 from .git_ops import (
-    make_milestone_branch_name,
     commit_changes,
+    make_milestone_branch_name,
     merge_branch_to_main,
 )
-from .data_types import MilestoneStatus
+from .worktree_ops import (
+    create_worktree,
+    find_available_ports,
+    remove_worktree,
+    setup_worktree_environment,
+)
 
 
 def setup_milestone(

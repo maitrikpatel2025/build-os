@@ -6,16 +6,16 @@ milestones, sections, design tokens, entities, and shell assets.
 
 import os
 import re
-import json
-from typing import List, Optional, Dict
+from typing import List, Optional
+
 from .data_types import (
-    ProductPlan,
-    ProductOverview,
+    DesignSystem,
     MilestoneInstruction,
+    ProductOverview,
+    ProductPlan,
     SectionAssets,
     SectionComponent,
     ShellAssets,
-    DesignSystem,
 )
 from .utils import get_project_root
 

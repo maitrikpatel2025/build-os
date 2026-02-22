@@ -1,9 +1,9 @@
 """Data types for Build OS pipeline."""
 
-from datetime import datetime
-from typing import Optional, List, Dict, Literal
-from pydantic import BaseModel, Field
 from enum import Enum
+from typing import Dict, List, Literal, Optional
+
+from pydantic import BaseModel, Field
 
 
 # Retry codes for Claude Code execution errors
@@ -29,11 +29,13 @@ MilestoneStatus = Literal[
     "complete",
 ]
 
-# Tech stack options
-FrontendFramework = Literal["react-vite", "react-cra"]
-BackendFramework = Literal["fastapi"]
-StylingFramework = Literal["tailwind"]
-DatabaseChoice = Literal["sqlite", "postgres", "none"]
+# Tech stack options — use str so any language/framework id is allowed.
+# Known built-in ids: frontend (react-vite, react-cra), backend (fastapi), styling (tailwind), database (sqlite, postgres, none).
+# Custom stacks: add templates under templates/frontend/{id}/ or templates/backend/{id}/ and use that id.
+FrontendFramework = str  # e.g. "react-vite", "react-cra", "next-js", "vue-vite"
+BackendFramework = str   # e.g. "fastapi", "express", "go-gin"
+StylingFramework = str   # e.g. "tailwind", "css-modules"
+DatabaseChoice = str     # e.g. "sqlite", "postgres", "none"
 
 # Build OS slash commands
 BuildSlashCommand = Literal[
@@ -54,10 +56,11 @@ BuildSlashCommand = Literal[
 # --- Tech Stack ---
 
 class TechStack(BaseModel):
-    frontend: FrontendFramework = "react-vite"
-    backend: BackendFramework = "fastapi"
-    styling: StylingFramework = "tailwind"
-    database: DatabaseChoice = "sqlite"
+    """Any language/framework: use registered ids or add templates under templates/frontend/{id}/, templates/backend/{id}/."""
+    frontend: str = "react-vite"
+    backend: str = "fastapi"
+    styling: str = "tailwind"
+    database: str = "sqlite"
 
 
 # --- Design System ---

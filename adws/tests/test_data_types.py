@@ -49,13 +49,13 @@ class TestTechStack:
         assert ts.frontend == "react-cra"
         assert ts.database == "postgres"
 
-    def test_invalid_frontend_rejected(self):
-        with pytest.raises(ValidationError):
-            TechStack(frontend="angular")
+    def test_any_frontend_accepted(self):
+        ts = TechStack(frontend="next-js")
+        assert ts.frontend == "next-js"
 
-    def test_invalid_database_rejected(self):
-        with pytest.raises(ValidationError):
-            TechStack(database="mongodb")
+    def test_any_database_accepted(self):
+        ts = TechStack(database="mongodb")
+        assert ts.database == "mongodb"
 
 
 # --- DesignSystem ---

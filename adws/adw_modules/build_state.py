@@ -5,12 +5,13 @@ tracking milestone progression, worktree mappings, and cost accumulation.
 """
 
 import json
+import logging
 import os
 import sys
-import logging
 from datetime import datetime
-from typing import Dict, Any, Optional, List
-from .data_types import BuildStateData, BuildMilestone, MilestoneStatus
+from typing import Any, Dict, List, Optional
+
+from .data_types import BuildStateData
 from .utils import get_project_root
 
 

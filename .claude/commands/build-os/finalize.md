@@ -17,7 +17,7 @@ Check for any remaining worktrees in `trees/`:
 - Report any that couldn't be removed
 
 ### 2. Run Full Test Suite
-Run all tests across the entire project:
+Run all tests using the **stack registry** for this build's tech stack (any language/framework). Get commands with `get_validation_commands_for_build(build_id)` from `adws.adw_modules.stack_registry`, or for default stacks (fastapi + react-vite/react-cra):
 
 **Backend tests:**
 ```bash
@@ -36,6 +36,7 @@ Report results:
 - Build success/failure
 
 ### 3. Run Lint Checks
+Use lint steps from the stack registry, or for default stacks:
 ```bash
 # Backend
 cd output/{product-slug}/app/server

@@ -6,13 +6,13 @@ and allocating unique ports for each isolated instance.
 Port ranges: Backend 9300-9314, Frontend 9400-9414 (avoids Agent HQ 9100-9214).
 """
 
-import os
-import subprocess
 import logging
+import os
 import shutil
 import socket
-from typing import Tuple, Optional
-from .build_state import BuildState
+import subprocess
+from typing import Optional, Tuple
+
 from .utils import get_project_root
 
 

@@ -45,7 +45,7 @@ Write `agents/{build_id}/build_state.json` with this structure:
   "build_id": "<generated>",
   "product_name": "<from overview>",
   "product_plan_path": "product-plan/",
-  "tech_stack": { "frontend": "react-vite", "backend": "fastapi", "styling": "tailwind", "database": "sqlite" },
+  "tech_stack": { "frontend": "react-vite", "backend": "fastapi", "styling": "tailwind", "database": "sqlite" }
   "milestones": [
     { "id": "01-shell", "name": "Shell", "section_id": null, "status": "pending" },
     { "id": "02-dashboard", "name": "Dashboard", "section_id": "dashboard", "status": "pending" }
@@ -68,7 +68,7 @@ Display:
 - Design system colors
 - Tech stack defaults
 
-Ask user to confirm tech stack preferences (React+Vite or CRA, database choice). Apply their preferences and save updated state.
+Ask user to confirm tech stack preferences. Built-in: frontend (react-vite, react-cra), backend (fastapi), database (sqlite, postgres, none). For any other language/framework they can specify an id and add templates under `templates/frontend/{id}/` or `templates/backend/{id}/`. Apply their preferences and save updated state.
 
 ## Output
 - `agents/{build_id}/build_state.json` created
