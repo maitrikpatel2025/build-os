@@ -153,6 +153,7 @@ class TestSlashCommandModelMap:
             "/build-os/finalize",
             "/build-os/status",
             "/build-os/resume",
+            "/build-os/test-e2e-section",
         ]
         for cmd in expected_commands:
             assert cmd in SLASH_COMMAND_MODEL_MAP

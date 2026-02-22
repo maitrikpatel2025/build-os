@@ -1,9 +1,7 @@
 """Tests for stack registry (any language/framework support)."""
 
-import pytest
 
 from adws.adw_modules.stack_registry import (
-    STACK_REGISTRY,
     get_backend_spec,
     get_frontend_spec,
     get_validation_commands,

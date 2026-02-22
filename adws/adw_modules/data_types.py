@@ -50,6 +50,7 @@ BuildSlashCommand = Literal[
     "/build-os/finalize",
     "/build-os/status",
     "/build-os/resume",
+    "/build-os/test-e2e-section",
 ]
 
 
@@ -77,6 +78,25 @@ class DesignSystem(BaseModel):
     tokens_css: Optional[str] = None
 
 
+# --- E2E Test Types ---
+
+class E2ETestStep(BaseModel):
+    """A single step result from an E2E test run."""
+    step: str                            # "Step 1: Navigate to dashboard"
+    passed: bool
+    error: Optional[str] = None
+
+
+class E2ETestResult(BaseModel):
+    """Result from running /build-os/test-e2e-section."""
+    test_name: str                       # "E2E: Dashboard"
+    test_path: str                       # path to the e2e spec file
+    status: Literal["passed", "failed"]
+    screenshots: List[str] = Field(default_factory=list)
+    steps: List[E2ETestStep] = Field(default_factory=list)
+    error: Optional[str] = None
+
+
 # --- Build Milestone ---
 
 class BuildMilestone(BaseModel):
@@ -88,6 +108,8 @@ class BuildMilestone(BaseModel):
     backend_port: Optional[int] = None
     frontend_port: Optional[int] = None
     branch_name: Optional[str] = None
+    e2e_test_status: Optional[str] = None          # "complete" | "failed"
+    e2e_test_results: Optional[E2ETestResult] = None
 
 
 # --- Build State ---
@@ -106,6 +128,7 @@ class BuildStateData(BaseModel):
     output_path: Optional[str] = None
     created_at: Optional[str] = None
     updated_at: Optional[str] = None
+    e2e_enabled: bool = True
 
 
 # --- Product Plan Parsing ---

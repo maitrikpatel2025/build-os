@@ -137,3 +137,37 @@ def product_plan_dir(tmp_path):
     )
 
     return plan_dir
+
+
+@pytest.fixture
+def e2e_passed_json():
+    """Sample E2E test result JSON — passed."""
+    return {
+        "test_name": "E2E: Dashboard",
+        "test_path": "agents/a1b2c3d4/e2e/dashboard/test_dashboard.md",
+        "status": "passed",
+        "screenshots": [
+            "agents/a1b2c3d4/e2e/dashboard/img/01_initial_load.png",
+        ],
+        "steps": [
+            {"step": "Step 1: Navigate to dashboard", "passed": True, "error": None},
+            {"step": "Step 2: Check stat cards", "passed": True, "error": None},
+        ],
+        "error": None,
+    }
+
+
+@pytest.fixture
+def e2e_failed_json():
+    """Sample E2E test result JSON — failed."""
+    return {
+        "test_name": "E2E: Dashboard",
+        "test_path": "agents/a1b2c3d4/e2e/dashboard/test_dashboard.md",
+        "status": "failed",
+        "screenshots": [],
+        "steps": [
+            {"step": "Step 1: Navigate to dashboard", "passed": True, "error": None},
+            {"step": "Step 2: Check stat cards", "passed": False, "error": "Element not found: .stat-card"},
+        ],
+        "error": "Step 2 failed: Element not found",
+    }

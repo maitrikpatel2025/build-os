@@ -38,6 +38,7 @@ SLASH_COMMAND_MODEL_MAP: Final[Dict[BuildSlashCommand, Dict[ModelSet, str]]] = {
     "/build-os/finalize": {"base": "sonnet", "heavy": "sonnet"},
     "/build-os/status": {"base": "sonnet", "heavy": "sonnet"},
     "/build-os/resume": {"base": "sonnet", "heavy": "opus"},
+    "/build-os/test-e2e-section": {"base": "sonnet", "heavy": "opus"},
 }
 
 

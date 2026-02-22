@@ -178,13 +178,16 @@ def get_milestone_summary(state: BuildState) -> str:
     total = len(milestones)
     complete = sum(1 for m in milestones if m["status"] == "complete")
 
+    e2e_icons = {"complete": " [e2e:ok]", "failed": " [e2e:FAIL]"}
+
     for m in milestones:
         icon = status_icons.get(m["status"], "[?]")
         section = f" ({m.get('section_id', 'shell')})" if m.get("section_id") else ""
         port_info = ""
         if m.get("backend_port"):
             port_info = f" | ports: {m['backend_port']}/{m['frontend_port']}"
-        lines.append(f"  {icon} {m['id']}: {m['name']}{section} — {m['status']}{port_info}")
+        e2e_info = e2e_icons.get(m.get("e2e_test_status", ""), "")
+        lines.append(f"  {icon} {m['id']}: {m['name']}{section} — {m['status']}{port_info}{e2e_info}")
 
     lines.append("-" * 60)
     lines.append(f"Progress: {complete}/{total} milestones complete")

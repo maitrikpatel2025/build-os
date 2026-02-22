@@ -243,3 +243,12 @@ class TestAgentTemplateRequest:
         )
         assert req.args == []
         assert req.model == "sonnet"
+
+    def test_e2e_slash_command_accepted(self):
+        req = AgentTemplateRequest(
+            agent_name="e2e_test_runner",
+            slash_command="/build-os/test-e2e-section",
+            build_id="abc12345",
+            args=["abc12345", "dashboard"],
+        )
+        assert req.slash_command == "/build-os/test-e2e-section"

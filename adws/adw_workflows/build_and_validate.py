@@ -16,6 +16,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from adw_modules.agent import execute_template
 from adw_modules.build_state import BuildState
 from adw_modules.data_types import AgentTemplateRequest
+from adw_modules.e2e_ops import run_e2e_with_resolution
 from adw_modules.milestone_ops import (
     advance_milestone_status,
     complete_milestone,
@@ -108,6 +109,23 @@ async def run_build_and_validate(build_id: str, section_id: str) -> bool:
 
         advance_milestone_status(state, milestone_id, next_status, logger)
         logger.info(f"{description} complete!")
+
+    # Optional E2E browser tests
+    e2e_enabled = state.get("e2e_enabled", True)
+    if e2e_enabled:
+        logger.info(f"Running E2E browser tests for {section_id}...")
+        e2e_result = run_e2e_with_resolution(
+            state, milestone_id, section_id, working_dir, logger, max_retries=2
+        )
+        if e2e_result is None:
+            logger.warning("E2E test execution failed — skipping (non-blocking)")
+        elif e2e_result.status == "failed":
+            logger.error(f"E2E tests failed for {section_id} after retries")
+            return False
+        else:
+            logger.info(f"E2E tests passed for {section_id}")
+    else:
+        logger.info("E2E tests disabled — skipping")
 
     # Complete milestone
     success, error = complete_milestone(state, milestone_id, logger)

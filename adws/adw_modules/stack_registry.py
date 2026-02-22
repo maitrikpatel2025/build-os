@@ -9,8 +9,7 @@ templates/backend/{id}/ and can be registered via STACK_REGISTRY or a config fil
 import os
 from typing import Any, Dict, List, Optional
 
-from .utils import get_project_root
-
+from .utils import get_project_root  # noqa: I001
 
 # Validation command: run from output project root; cwd is relative to that.
 ValidationStep = Dict[str, str]  # {"name": "...", "cwd": "app/server", "command": "uv run pytest -v"}
