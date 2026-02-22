@@ -5,6 +5,7 @@ import path from 'path'
 
 export default defineConfig({
   plugins: [react(), tailwindcss()],
+  assetsInclude: ['**/*.md'],
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
@@ -12,5 +13,8 @@ export default defineConfig({
   },
   server: {
     port: 3100,
+    watch: {
+      ignored: ['**/product-plan/**'],
+    },
   },
 })
